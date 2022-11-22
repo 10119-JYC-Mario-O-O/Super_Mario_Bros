@@ -284,7 +284,7 @@ function render() {
 					}
 					
 					if(GW * 64 - 64 >= mario_x -60 && GW * 64 - 64 <= mario_x + 60){
-						if(GH * 64 - 128 < marioGround_y){
+						if(GH * 64 - 128 < marioGround_y && GH * 64 - 64 > mario_y){
 							marioGround_y = GH * 64 - 128;
 						}
 					}
@@ -304,7 +304,7 @@ function render() {
 					}
 					
 					if(GW * 64 - 64 >= mario_x - 60 && GW * 64 - 64 <= mario_x + 60){
-						if(GH * 64 - 128 < marioGround_y){
+						if(GH * 64 - 128 < marioGround_y && GH * 64 - 64 > mario_y){
 							marioGround_y = GH * 64 - 128;
 						}
 					}
@@ -332,7 +332,7 @@ function render() {
 					}
 					
 					if(GW * 64 - LevelWidth * 64 + 960 >= mario_x - LevelWidth * 64 + 976 && GW * 64 - LevelWidth * 64 + 960 <= mario_x - LevelWidth * 64 + 1064){
-						if(GH * 64 - 128 < marioGround_y){
+						if(GH * 64 - 128 < marioGround_y && GH * 64 - 64 > mario_y){
 							marioGround_y = GH * 64 - 128;
 						}
 					}
@@ -352,7 +352,7 @@ function render() {
 					}
 					
 					if(GW * 64 - LevelWidth * 64 + 960 >= mario_x - LevelWidth * 64 + 976 && GW * 64 - LevelWidth * 64 + 960 <= mario_x - LevelWidth * 64 + 1064){
-						if(GH * 64 - 128 < marioGround_y){
+						if(GH * 64 - 128 < marioGround_y && GH * 64 - 64 > mario_y){
 							marioGround_y = GH * 64 - 128;
 						}
 					}
@@ -381,13 +381,13 @@ function render() {
 				}
 					
 				if(GW * 64 - 64 >= mario_x - 60 && GW * 64 - 64 <= mario_x + 60){
-					if(GH * 64 - 128 < marioGround_y){
+					if(GH * 64 - 128 < marioGround_y && GH * 64 - 64 > mario_y){
 						marioGround_y = GH * 64 - 128;
 					}
 				}
 
 				if(GW * 64 - mario_x >= 80 && GW * 64 - mario_x <= 48){
-					if(GH * 64 - 128 < marioGround_y){
+					if(GH * 64 - 128 < marioGround_y && GH * 64 - 64 > mario_y){
 							marioGround_y = GH * 64 - 128;
 					}
 				}
@@ -407,13 +407,13 @@ function render() {
 				}
 					
 				if(GW * 64 - 64 >= mario_x - 60 && GW * 64 - 64 <= mario_x + 60){
-					if(GH * 64 - 128 < marioGround_y){
+					if(GH * 64 - 128 < marioGround_y && GH * 64 - 64 > mario_y){
 						marioGround_y = GH * 64 - 128;
 					}
 				}
 				
 				if(GW * 64 - mario_x >= 80 && GW * 64 - mario_x <= 48){
-					if(GH * 64 - 128 < marioGround_y){
+					if(GH * 64 - 128 < marioGround_y && GH * 64 - 64 > mario_y){
 							marioGround_y = GH * 64 - 128;
 					}
 				}
