@@ -1,4 +1,6 @@
 //캔버스 세팅
+let Game_Start = true;
+let Pause = true;
 let canvas;
 let ctx;
 canvas = document.createElement("canvas");
@@ -6,7 +8,7 @@ ctx = canvas.getContext("2d");
 canvas.width = 1024;
 canvas.height = 1024;
 document.body.appendChild(canvas);
-let BG, Ground, HB, G1, G2, G3, MLJ, MLS, MLW1, MLW2, MLW3, MLW4, MRJ, MRS, MRW1, MRW2, MRW3, MRW4;
+let Start, CSS, BG, Ground, HB, G1, G2, G3, MLJ, MLS, MLW1, MLW2, MLW3, MLW4, MRJ, MRS, MRW1, MRW2, MRW3, MRW4;
 let marioset_x = 0;
 let marioset_y = 0;
 let mario_x = 128;
@@ -20,6 +22,7 @@ let isMidair = false;
 let isJumpStop = false;
 let isScrolling = false;
 let Do_Not_Move = false;
+let HSNS = false;
 let L_DNM = false;
 let R_DNM = false;
 let marioGround_y = 832;
@@ -57,8 +60,8 @@ let LevelBackUp1 = [00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 
 			 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00,
 			 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00,
 			 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00,
-			 01, 01, 01, 01, 01, 00, 00, 00, 00, 00, 01, 01, 01, 01, 01, 00, 00, 00, 00, 00, 01, 01, 01, 01, 01, 00, 00, 00, 00, 00, 01, 01, 01, 01, 01, 00, 00, 00, 00, 00, 01, 01, 01, 01, 01, 00, 00, 01,
-			 01, 01, 01, 01, 01, 00, 00, 00, 00, 00, 01, 01, 01, 01, 01, 00, 00, 00, 00, 00, 01, 01, 01, 01, 01, 00, 00, 00, 00, 00, 01, 01, 01, 01, 01, 00, 00, 00, 00, 00, 01, 01, 01, 01, 01, 00, 00, 01];
+			 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01,
+			 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01];
 
 let LevelBackUp2 = [00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00,
 			 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00,
@@ -78,7 +81,11 @@ let LevelBackUp2 = [00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 
 			 01, 01, 01, 01, 01, 01, 00, 00, 00, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 00, 00, 00, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 00, 00, 00, 01, 01, 01, 01, 01, 01];
 
 function loadImage() {
-    BG = new Image();
+    Start = new Image();
+    Start.src = "images/Start.png";
+	CSS = new Image();
+    CSS.src = "images/CSS.png";
+	BG = new Image();
     BG.src = "images/BG.png";
     Ground =new Image();
     Ground.src = "images/Ground.png"
@@ -127,10 +134,19 @@ function setKeyboardListener() {
             isPushing = false;
 			isJumpStop = true;
         }
+		if(event.keyCode == 13){
+            Game_Start = false;
+			Pause = !Pause;
+        }
     });
 }
 
 function update() {
+	if(HSNS){
+		isJumpStop = true;
+		isStop = true;
+	}
+		
     if(65 in keysDown){
         face = 0;
 
@@ -194,7 +210,7 @@ function update() {
 		isStop = false;
     }
 
-    if(74 in keysDown && !isJumpStop){
+    if(74 in keysDown && !isJumpStop && !HSNS){
         isPushing = true;
 		isStop = false;
 
@@ -247,6 +263,12 @@ function update() {
             marioset_x = 0;
     }
 
+	if(HSNS){
+		if(marioset_y){
+			marioset_y += 1;
+		}
+	}
+
     if(mario_y < marioGround_y){
         marioset_y += 0.5;
     }else if(!isMidair){
@@ -287,6 +309,9 @@ function render() {
 						if(GH * 64 - 128 < marioGround_y && GH * 64 - 64 > mario_y){
 							marioGround_y = GH * 64 - 128;
 						}
+						if(GH * 64 + 24 > mario_y && GH * 64 - 32 < mario_y){
+							HSNS = true;
+						}
 					}
 					
 					ctx.drawImage(Ground, GW * 64 - 64, GH * 64 - 64);
@@ -306,6 +331,9 @@ function render() {
 					if(GW * 64 - 64 >= mario_x - 60 && GW * 64 - 64 <= mario_x + 60){
 						if(GH * 64 - 128 < marioGround_y && GH * 64 - 64 > mario_y){
 							marioGround_y = GH * 64 - 128;
+						}
+						if(GH * 64 + 24 > mario_y && GH * 64 - 32 < mario_y){
+							HSNS = true;
 						}
 					}
 					
@@ -335,6 +363,9 @@ function render() {
 						if(GH * 64 - 128 < marioGround_y && GH * 64 - 64 > mario_y){
 							marioGround_y = GH * 64 - 128;
 						}
+						if(GH * 64 + 24 > mario_y && GH * 64 - 32 < mario_y){
+							HSNS = true;
+						}
 					}
 					
 					ctx.drawImage(Ground, GW * 64 - LevelWidth * 64 + 960, GH * 64 - 64);
@@ -354,6 +385,9 @@ function render() {
 					if(GW * 64 - LevelWidth * 64 + 960 >= mario_x - LevelWidth * 64 + 976 && GW * 64 - LevelWidth * 64 + 960 <= mario_x - LevelWidth * 64 + 1064){
 						if(GH * 64 - 128 < marioGround_y && GH * 64 - 64 > mario_y){
 							marioGround_y = GH * 64 - 128;
+						}
+						if(GH * 64 + 24 > mario_y && GH * 64 - 32 < mario_y){
+							HSNS = true;
 						}
 					}
 					
@@ -384,12 +418,18 @@ function render() {
 					if(GH * 64 - 128 < marioGround_y && GH * 64 - 64 > mario_y){
 						marioGround_y = GH * 64 - 128;
 					}
+					if(GH * 64 + 24 > mario_y && GH * 64 - 32 < mario_y){
+							HSNS = true;
+						}
 				}
 
 				if(GW * 64 - mario_x >= 80 && GW * 64 - mario_x <= 48){
 					if(GH * 64 - 128 < marioGround_y && GH * 64 - 64 > mario_y){
 							marioGround_y = GH * 64 - 128;
 					}
+					if(GH * 64 + 24 > mario_y && GH * 64 - 32 < mario_y){
+							HSNS = true;
+						}
 				}
 				
 				ctx.drawImage(Ground, GW * 64 + 448 - mario_x, GH * 64 - 64);
@@ -410,11 +450,17 @@ function render() {
 					if(GH * 64 - 128 < marioGround_y && GH * 64 - 64 > mario_y){
 						marioGround_y = GH * 64 - 128;
 					}
+					if(GH * 64 + 24 > mario_y && GH * 64 - 32 < mario_y){
+						HSNS = true;
+					}
 				}
 				
 				if(GW * 64 - mario_x >= 80 && GW * 64 - mario_x <= 48){
 					if(GH * 64 - 128 < marioGround_y && GH * 64 - 64 > mario_y){
 							marioGround_y = GH * 64 - 128;
+					}
+					if(GH * 64 + 24 > mario_y && GH * 64 - 32 < mario_y){
+						HSNS = true;
 					}
 				}
 				
@@ -435,6 +481,7 @@ function render() {
 		}
 		if(!isPushing && isJumpStop){
 			isJumpStop = false;
+			HSNS = false;
 		}
     }
 
@@ -449,7 +496,7 @@ function render() {
     ctx.fillText(`Do_Not_Move : ${Do_Not_Move}`, 20, 280);
 	ctx.fillText(`L_DNM : ${L_DNM}`, 20, 300);
 	ctx.fillText(`R_DNM : ${R_DNM}`, 20, 320);
-	ctx.fillText(`Ground : ${marioGround_y}`, 20, 340);
+	ctx.fillText(`HSNS : ${HSNS}`, 20, 340);
 	ctx.fillText(`X : ${mario_x}`, 20, 360);
 	ctx.fillText(`Y : ${mario_y}`, 20, 380);
 	
@@ -600,8 +647,15 @@ function render() {
 }
 
 function main() {
-    update();
-    render();
+    if(!Pause && !Game_Start){
+		update();
+	    render();
+	}else if(Game_Start){
+		ctx.fillStyle = "white";
+    	ctx.font = "100px Arial"
+		ctx.drawImage(Start, 0, 0);
+		ctx.fillText(`Press 'Enter' to start`, 64, 768);
+	}
     requestAnimationFrame(main);
 }
 
