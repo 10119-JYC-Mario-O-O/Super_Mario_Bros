@@ -124,17 +124,17 @@ function update() {
         is_A_press = true;		
 	}
 
-	for(let i = 0; i < Trio1Clap.length; i++){
-		if(Title_music.currentTime == i){
-			T1P = 2;
-		}
-	}
+	//for(let i = 0; i < Trio1Clap.length; i++){
+		//if(Title_music.currentTime == i){
+			//T1P = 2;
+		//}
+	//}
 
-	for(let i = 0; i < Trio2Clap.length; i++){
-		if(Title_music.currentTime == i){
-			T2P = 2;
-		}
-	}
+	//for(let i = 0; i < Trio2Clap.length; i++){
+		//if(Title_music.currentTime == i){
+			//T2P = 2;
+		//}
+	//}
 
 	if(T1P >= 2 && T1P <= 3){
 		ClapFrame1++;
